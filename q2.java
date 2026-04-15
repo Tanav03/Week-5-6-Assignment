@@ -3,37 +3,31 @@ import java.util.Scanner;
 public class q2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] numbers = new int[5];
+        int[] ages = new int[3];
+        int[] heights = new int[3];
+        String[] names = {"Amar", "Akbar", "Anthony"};
         
-        System.out.println("Enter 5 numbers:");
-        for (int i = 0; i < numbers.length; i++) {
-            System.out.print("Number " + (i + 1) + ": ");
-            numbers[i] = sc.nextInt();
+        System.out.println("Enter age and height for 3 friends:");
+        for (int i = 0; i < 3; i++) {
+            System.out.print(names[i] + " - Age: ");
+            ages[i] = sc.nextInt();
+            System.out.print(names[i] + " - Height: ");
+            heights[i] = sc.nextInt();
         }
         
-        System.out.println("\nNumber Analysis:");
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] > 0) {
-                if (numbers[i] % 2 == 0) {
-                    System.out.println(numbers[i] + " is positive and even");
-                } else {
-                    System.out.println(numbers[i] + " is positive and odd");
-                }
-            } else if (numbers[i] < 0) {
-                System.out.println(numbers[i] + " is negative");
-            } else {
-                System.out.println(numbers[i] + " is zero");
+        int youngestIndex = 0, tallestIndex = 0;
+        
+        for (int i = 1; i < 3; i++) {
+            if (ages[i] < ages[youngestIndex]) {
+                youngestIndex = i;
+            }
+            if (heights[i] > heights[tallestIndex]) {
+                tallestIndex = i;
             }
         }
         
-        System.out.println("\nComparison of first and last element:");
-        if (numbers[0] == numbers[4]) {
-            System.out.println(numbers[0] + " is equal to " + numbers[4]);
-        } else if (numbers[0] > numbers[4]) {
-            System.out.println(numbers[0] + " is greater than " + numbers[4]);
-        } else {
-            System.out.println(numbers[0] + " is less than " + numbers[4]);
-        }
+        System.out.println("\nYoungest friend: " + names[youngestIndex] + " (Age: " + ages[youngestIndex] + ")");
+        System.out.println("Tallest friend: " + names[tallestIndex] + " (Height: " + heights[tallestIndex] + ")");
         
         sc.close();
     }
