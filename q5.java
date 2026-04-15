@@ -6,16 +6,23 @@ public class q5 {
         
         System.out.print("Enter a number: ");
         int number = sc.nextInt();
-        int[] multiplicationResult = new int[4];
         
-        for (int i = 6; i <= 9; i++) {
-            multiplicationResult[i - 6] = number * i;
+        int digitCount = String.valueOf(Math.abs(number)).length();
+        int[] digits = new int[digitCount];
+        int temp = Math.abs(number);
+        int index = 0;
+        
+        while (temp != 0) {
+            digits[index] = temp % 10;
+            temp /= 10;
+            index++;
         }
         
-        System.out.println("\nMultiplication table of " + number + " from 6 to 9:");
-        for (int i = 6; i <= 9; i++) {
-            System.out.println(number + " * " + i + " = " + multiplicationResult[i - 6]);
+        System.out.println("\nReversed number:");
+        for (int i = 0; i < digits.length; i++) {
+            System.out.print(digits[i]);
         }
+        System.out.println();
         
         sc.close();
     }

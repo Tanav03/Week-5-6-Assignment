@@ -6,16 +6,30 @@ public class q3 {
         
         System.out.print("Enter a number: ");
         int number = sc.nextInt();
-        int[] multiplicationTable = new int[10];
+        int maxDigit = 10;
+        int[] digits = new int[maxDigit];
+        int index = 0;
+        int temp = Math.abs(number);
         
-        for (int i = 1; i <= 10; i++) {
-            multiplicationTable[i - 1] = number * i;
+        while (temp != 0) {
+            digits[index] = temp % 10;
+            temp /= 10;
+            index++;
         }
         
-        System.out.println("\nMultiplication table of " + number + ":");
-        for (int i = 0; i < multiplicationTable.length; i++) {
-            System.out.println(number + " * " + (i + 1) + " = " + multiplicationTable[i]);
+        int largest = digits[0], secondLargest = -1;
+        
+        for (int i = 0; i < index; i++) {
+            if (digits[i] > largest) {
+                secondLargest = largest;
+                largest = digits[i];
+            } else if (digits[i] > secondLargest && digits[i] != largest) {
+                secondLargest = digits[i];
+            }
         }
+        
+        System.out.println("Largest digit: " + largest);
+        System.out.println("Second largest digit: " + secondLargest);
         
         sc.close();
     }

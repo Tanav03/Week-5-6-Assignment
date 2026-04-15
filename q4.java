@@ -3,35 +3,41 @@ import java.util.Scanner;
 public class q4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        double[] numbers = new double[10];
-        double total = 0.0;
+        
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
+        int maxDigit = 10;
+        int[] digits = new int[maxDigit];
         int index = 0;
+        int temp = Math.abs(number);
         
-        System.out.println("Enter numbers (enter 0 or negative to stop):");
-        
-        while (true) {
-            System.out.print("Enter number: ");
-            double num = sc.nextDouble();
-            
-            if (num <= 0) {
-                break;
+        while (temp != 0) {
+            if (index == maxDigit) {
+                int[] newDigits = new int[maxDigit + 10];
+                for (int i = 0; i < maxDigit; i++) {
+                    newDigits[i] = digits[i];
+                }
+                digits = newDigits;
+                maxDigit += 10;
             }
-            
-            if (index >= 10) {
-                break;
-            }
-            
-            numbers[index] = num;
-            total += num;
+            digits[index] = temp % 10;
+            temp /= 10;
             index++;
         }
         
-        System.out.println("\nNumbers entered:");
+        int largest = digits[0], secondLargest = -1;
+        
         for (int i = 0; i < index; i++) {
-            System.out.println(numbers[i]);
+            if (digits[i] > largest) {
+                secondLargest = largest;
+                largest = digits[i];
+            } else if (digits[i] > secondLargest && digits[i] != largest) {
+                secondLargest = digits[i];
+            }
         }
         
-        System.out.println("Sum of all numbers: " + total);
+        System.out.println("Largest digit: " + largest);
+        System.out.println("Second largest digit: " + secondLargest);
         
         sc.close();
     }
